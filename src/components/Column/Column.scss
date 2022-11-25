@@ -51,7 +51,7 @@ $list-bg-color: #ebecf0;
         border-right: 5px solid $list-bg-color;
       }
       
-      li { 
+       li.card-item { 
         background-color: #fff;
         padding: $gap;
         border-radius: $card-border-radius;
