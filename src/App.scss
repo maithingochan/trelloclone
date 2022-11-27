@@ -10,9 +10,10 @@ body {
 
 .trello {
   height: 100vh;// chieeuf cao full namhinh
-  display:grid; // chia man hình thành 3 row
-  grid-template-rows: 40px 50px 1fr ;// header 40px board 50px phần còn lại 1fr khung hinh
-  line-height:1.3em; // khoản cách giữa các row
+  overflow: hidden;
+  // display:grid; // chia man hình thành 3 row
+  // grid-template-rows: 40px 50px 1fr ;// header 40px board 50px phần còn lại 1fr khung hinh
+  // line-height:1.3em; // khoản cách giữa các row
   background-color: $board-bg-color;
 
     
