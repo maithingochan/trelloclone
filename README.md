@@ -13,3 +13,5 @@
 - git push origin master
 
 - git checkout -b update_readme
+
+$ git checkout -b handle_state_change
