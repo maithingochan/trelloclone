@@ -87,7 +87,7 @@ export default function BoardContent() {
     let newBoard = { ...board }
     newBoard.columnOrder = newColumns.map(c => c.id)
     newBoard.columns = newColumns
-    
+
     setColumns(newColumns)
     setBoard(newBoard)
 
@@ -96,6 +96,27 @@ export default function BoardContent() {
   }
   const onNewColumnTitleChange = (e) => {
     setColumnTitle(e.target.value)
+  }
+
+  const onUpdateColumn = (newColumntoUpdate) => {
+    const columnIdToUpdate = newColumntoUpdate.id
+
+    let newColumns = [...columns]
+    const columnIndexToUpdate = newColumns.findIndex(i => i.id === columnIdToUpdate)
+    if (newColumntoUpdate._destroy) {
+      //remove column
+      newColumns.splice(columnIndexToUpdate, 1)
+    } else { 
+      // update column info 
+      newColumns.splice(columnIndexToUpdate, 1, newColumntoUpdate)
+    }
+
+    let newBoard = { ...board }
+    newBoard.columnOrder = newColumns.map(c => c.id)
+    newBoard.columns = newColumns
+
+    setColumns(newColumns)
+    setBoard(newBoard)
   }
   return (
     <div className="board_content">
@@ -114,7 +135,7 @@ export default function BoardContent() {
         {
           columns.map((column, index) => (
             <Draggable key={index}>
-              <Column column= {column} onCardDrop={onCardDrop} />
+              <Column column= {column} onCardDrop={onCardDrop} onUpdateColumn={onUpdateColumn} />
             </Draggable>
           ))
         }
@@ -138,6 +159,7 @@ export default function BoardContent() {
               ref={newColumnInputRef}
               value={newColumnTitle}
               onChange={onNewColumnTitleChange}
+              onKeyDown={e => (e.key === 'Enter') && addNewColumn()}
             />
             <Button variant="success" size="sm" onClick={addNewColumn} onKeyDown={e => (e.key === 'Enter') && addNewColumn()}>Add column</Button>
             <span className="cancel-new-column" onClick={toggleOpennewColumnForm}><i className="fa fa-trash icon" /></span>
